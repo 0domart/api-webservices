@@ -5,6 +5,7 @@ import com.epul.cerisaie.mesExceptions.MonException;
 import com.epul.cerisaie.service.CategorieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class CategorieController {
 /**************Tous les clients  ******************/
     /*************************************************/
 
+    @PreAuthorize("hasAnyAuthority('admin', 'visiteur')")
     @GetMapping("/getAll")
     public List<CategorieEntity> findAllClients() {
         String destinationPage = "";
@@ -36,6 +38,7 @@ public class CategorieController {
         return mesCategories;
     }
 
+    @PreAuthorize("hasAnyAuthority('admin', 'visiteur')")
     @GetMapping("/{id}")
     public CategorieEntity getCategorieById(@PathVariable(value = "id") String id) {
         CategorieEntity categorieEntity = null;

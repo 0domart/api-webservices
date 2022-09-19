@@ -7,6 +7,7 @@ import com.epul.cerisaie.service.CategorieService;
 import com.epul.cerisaie.service.PersonnageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class PersonnageController {
 /**************Tous les clients  ******************/
     /*************************************************/
 
+    @PreAuthorize("hasAnyAuthority('admin', 'visiteur')")
     @GetMapping("/getAll")
     public List<PersonnageEntity> findAllPersonnages() {
         List<PersonnageEntity> mesPersonnages = null;

@@ -4,6 +4,7 @@ import com.epul.cerisaie.domains.RealisateurEntity;
 import com.epul.cerisaie.service.RealisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class RealisateurController {
 /**************Tous les clients  ******************/
     /*************************************************/
 
+    @PreAuthorize("hasAnyAuthority('admin', 'visiteur')")
     @GetMapping("/getAll")
     public List<RealisateurEntity> findAllRealisateurs() {
         String destinationPage = "";
@@ -33,6 +35,7 @@ public class RealisateurController {
         return mesRealisateurs;
     }
 
+    @PreAuthorize("hasAnyAuthority('admin', 'visiteur')")
     @GetMapping("/{id}")
     public RealisateurEntity getRealisateurById(@PathVariable(value = "id") int id) {
         RealisateurEntity realisateurEntity = null;

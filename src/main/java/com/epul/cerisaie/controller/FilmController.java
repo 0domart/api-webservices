@@ -38,6 +38,7 @@ public class FilmController {
         return mesClients;
     }
 
+    @PreAuthorize("hasAnyAuthority('admin', 'visiteur')")
     @GetMapping("/{id}")
     public FilmEntity getFilmById(@PathVariable(value = "id") int id) {
         FilmEntity filmEntity = null;
