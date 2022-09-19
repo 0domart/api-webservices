@@ -9,6 +9,6 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(){
-        return "index";
+        return "Welcome to the Cinema API";
     }
 }
